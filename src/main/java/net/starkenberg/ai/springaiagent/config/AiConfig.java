@@ -1,33 +1,15 @@
 package net.starkenberg.ai.springaiagent.config;
 
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.DefaultChatClientBuilder;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
-import org.springframework.ai.chat.client.advisor.api.Advisor;
-import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
-import org.springframework.ai.chat.client.advisor.vectorstore.VectorStoreChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
-import org.springframework.ai.embedding.EmbeddingModel;
-import org.springframework.ai.openai.OpenAiEmbeddingModel;
-import org.springframework.ai.openai.api.OpenAiApi;
-import org.springframework.ai.vectorstore.SearchRequest;
+import org.springframework.ai.rag.advisor.RetrievalAugmentationAdvisor;
 import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.ai.vectorstore.pinecone.PineconeVectorStore;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AiConfig {
-
-    private final String pineconeApiKey;
-    private final String pineconeIndexName;
-
-    public AiConfig(@Value("${spring.ai.vectorstore.pinecone.api-key}")String pineconeApiKey
-            , @Value("${spring.ai.vectorstore.pinecone.index-name}")String pineconeIndexName) {
-        this.pineconeApiKey = pineconeApiKey;
-        this.pineconeIndexName = pineconeIndexName;
-    }
 
     @Bean
     public ChatClient chatClient(ChatClient.Builder chatClientBuilder, VectorStore vectorStore) {
@@ -47,24 +29,7 @@ public class AiConfig {
                 .defaultSystem(systemPrompt)
                 .defaultAdvisors(
                         MessageChatMemoryAdvisor.builder(MessageWindowChatMemory.builder().build()).build()
-//                       , QuestionAnswerAdvisor.builder(vectorStore).build()
+                      , RetrievalAugmentationAdvisor.builder().build()
                 ).build();
-    }
-
-//    @Bean
-//    public VectorStore vectorStore(EmbeddingModel embeddingModel) {
-//        return PineconeVectorStore.builder(embeddingModel)
-//                .apiKey(pineconeApiKey).indexName(pineconeIndexName)
-//                .namespace("avgo").build();
-//    }
-
-    @Bean
-    public Advisor retrievalAugmentationAdvisor() {
-        RetrievalAugmentationAdvisor.builder()
-                .documentRetriever(VectorStoreDocumentRetriever.builder()
-                        .similarityThreshold(0.50)
-                        .vectorStore(vectorStore)
-                        .build())
-                .build();
     }
 }
