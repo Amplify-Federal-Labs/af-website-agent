@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: spring-ai-agent
+  ai:
+    openai:
+      api-key: "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"
+      embedding:
+        options:
+          model: "text-embedding-3-small"
+    vectorstore:
+      pinecone:
+        api-key: "pcsk_mXpwf_HFa3oWXNRCqcorMRLubrzZB397P5b44rGipRdXZ9npadYmfbkhTkPru5Xu4zEzz"
+        index-name: "n8ncourse"
+        namespace: "avgo"
