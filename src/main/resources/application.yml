@@ -8,7 +8,18 @@ spring:
         options:
           model: "text-embedding-3-small"
     vectorstore:
-      pinecone:
-        api-key: "pcsk_mXpwf_HFa3oWXNRCqcorMRLubrzZB397P5b44rGipRdXZ9npadYmfbkhTkPru5Xu4zEzz"
-        index-name: "n8ncourse"
-        namespace: "avgo"
+      milvus:
+        client:
+          host: "localhost"
+          port: 19530
+          username: "root"
+          password: "milvus"
+        databaseName: "default"
+        collectionName: "vector_store"
+        embeddingDimension: 1536
+        indexType: IVF_FLAT
+        metricType: COSINE
+        initialize-schema: true
+app:
+  site:
+    baseUrl: "https://amplifyfederal.com"
