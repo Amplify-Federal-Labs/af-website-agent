@@ -3,23 +3,13 @@ spring:
     name: spring-ai-agent
   ai:
     openai:
-      api-key: "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"
+      api-key: "override-me"
       embedding:
         options:
           model: "text-embedding-3-small"
     vectorstore:
-      milvus:
-        client:
-          host: "localhost"
-          port: 19530
-          username: "root"
-          password: "milvus"
-        databaseName: "default"
-        collectionName: "vector_store"
-        embeddingDimension: 1536
-        indexType: IVF_FLAT
-        metricType: COSINE
-        initialize-schema: true
+      pinecone:
+        index-name: "amplify"
 app:
   site:
     baseUrl: "https://amplifyfederal.com"

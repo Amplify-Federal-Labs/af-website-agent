@@ -1,9 +1,6 @@
 package net.starkenberg.ai.springaiagent.bootstrap;
 
 
-import io.milvus.client.MilvusClient;
-import io.milvus.param.collection.CreateCollectionParam;
-import io.milvus.param.collection.HasCollectionParam;
 import lombok.extern.slf4j.Slf4j;
 import net.starkenberg.ai.springaiagent.services.WebScraperService;
 import org.springframework.ai.document.Document;
@@ -11,7 +8,6 @@ import org.springframework.ai.reader.tika.TikaDocumentReader;
 import org.springframework.ai.transformer.splitter.TextSplitter;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.ai.vectorstore.milvus.MilvusVectorStore;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 

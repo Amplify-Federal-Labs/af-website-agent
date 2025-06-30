@@ -5,8 +5,6 @@ import lombok.RequiredArgsConstructor;
 import net.starkenberg.ai.springaiagent.chat.Answer;
 import net.starkenberg.ai.springaiagent.chat.CustomerSupportAssistant;
 import net.starkenberg.ai.springaiagent.chat.Question;
-import org.springframework.ai.chat.model.ChatModel;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
