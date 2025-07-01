@@ -13,3 +13,5 @@ spring:
 app:
   site:
     baseUrl: "https://amplifyfederal.com"
+server:
+  port: ${PORT:8080}
