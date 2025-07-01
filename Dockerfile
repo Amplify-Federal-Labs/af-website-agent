@@ -9,6 +9,7 @@ WORKDIR /app
 # Copy the project files
 COPY pom.xml .
 COPY src ./src
+COPY .git ./.git
 
 # Build the application
 RUN mvn clean package -DskipTests
