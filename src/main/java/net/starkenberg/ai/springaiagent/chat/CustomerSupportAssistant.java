@@ -15,11 +15,13 @@ public class CustomerSupportAssistant {
     public CustomerSupportAssistant(ChatClient.Builder chatClientBuilder, VectorStore vectorStore, ChatMemory chatMemory) {
         this.chatClient = chatClientBuilder
                 .defaultSystem("""
-						You are a customer chat support agent for the Amplify Federal website."
+						You are a customer chat support agent for the Amplify Federal website.
+						Assume all questions pertain to Amplify Federal,
+						if Amplify Federal is not mentioned in the question, add it to the question.
 						Respond in a friendly, helpful, and joyful manner.
 						You are interacting with customers through an online chat system.
 						If you can not retrieve the information requested from the documents provided
-						, please just say "I am sorry, I can not find the information requested".
+						, please just say "I am sorry, I can not find the information requested.
 					""")
                 .defaultAdvisors(
                     MessageChatMemoryAdvisor.builder(chatMemory).build(),

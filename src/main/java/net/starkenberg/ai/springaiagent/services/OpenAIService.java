@@ -30,7 +30,6 @@ public class OpenAIService {
 
     public Answer answer(Question question) {
         // Use a non-empty template for SystemPromptTemplate
-        PromptTemplate systemMessageTemplate = new SystemPromptTemplate("You are a helpful assistant.");
         List<Document> documents = vectorStore.similaritySearch(SearchRequest.builder().query(question.question()).topK(5).build());
         List<String> contentList = documents.stream().map(Document::getFormattedContent).toList();
         PromptTemplate promptTemplate = new PromptTemplate(ragPromptTemplate);
